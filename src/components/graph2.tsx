@@ -37,19 +37,22 @@ export const Graph2: React.FC<GraphProps> = ({ data }) => {
 
     // Set initial positions for nodes
     data.nodes.forEach(node => {
-      node.x = Math.random() * 800; // Random x within SVG width
-      node.y = Math.random() * 600; // Random y within SVG height
+      node.x = Math.random() * (800 - 50); // Random x within SVG width
+      node.y = Math.random() * (600 - 50); // Random y within SVG height
     });
 
     // Append circles for nodes
     const nodes = svg
       .selectAll('circle')
-      .data(data.nodes)
+      .data(data.nodes, (d: any) => d.id) // Use node id as key
       .enter()
       .append('circle')
       .attr('r', 20)
-      .attr('fill', 'transparent')
-      .attr('stroke', 'white');
+      .attr('stroke-width', 2)
+      .attr('stroke', d =>
+        d.id === 'S' ? 'blue' : d.id === 'P' ? 'green' : 'white'
+      ) // Color based on node id
+      .attr('fill', 'transparent'); // Color based on node id
 
     // Append text labels for nodes
     const labels = svg
@@ -129,5 +132,11 @@ export const Graph2: React.FC<GraphProps> = ({ data }) => {
     // };
   }, [data]);
 
-  return <svg ref={svgRef} />;
+  return (
+    <div className="flex flex-col">
+      <div>shortest path: </div>
+      <div>distance: </div>
+      <svg ref={svgRef} />
+    </div>
+  );
 };
