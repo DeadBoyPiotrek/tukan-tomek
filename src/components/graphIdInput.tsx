@@ -17,13 +17,14 @@ export const GraphIdInput = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
     const id = data.id;
-    const response = await fetch('/api/graph', {
+    const response = await fetch(`/api/graph?id=${id}}`, {
       method: 'GET',
-      body: JSON.stringify({ id }),
     });
+    console.log(`🚀 ~ GraphIdInput ~ response:`, response);
 
     const result = await response.json();
-    if (result.id) saveGraphId(result.id);
+    console.log(`🚀 ~ GraphIdInput ~ result:`, result);
+    if (result?.id) saveGraphId(result.id);
     reset();
   };
 
