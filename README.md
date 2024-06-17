@@ -12,6 +12,7 @@ Ensure you have the following installed on your machine:
    ```bash
    git clone https://github.com/DeadBoyPiotrek/tukan-tomek.git
    cd tukan-tomek
+   code .
    ```
 
 2. **Install dependencies:**
